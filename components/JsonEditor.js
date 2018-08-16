@@ -8,44 +8,12 @@ import 'brace/snippets/json';
 import 'brace/ext/language_tools';
 
 import jsonTemplate from '../lib/json-object.json';
+import snippet from '../lib/json-snippet'
 
-// SUPER HACK TO ADD SNIPPET
-// eslint-disable-next-line
+// SUPER HACK FOR ADDING SNIPPETS
 ace.define('ace/snippets/json', ['require', 'exports', 'module'], (e,t,n) => {
   // eslint-disable-next-line
-  (t.snippetText =
-    // eslint-disable-next-line
-    '\
-# AddNode\n\
-snippet nodeadd\n\
-	{\n\
-			"name": "${1:name}",\n\
-			"nodes": [\n\
-				{\n\
-					"nodeName": "${2:node_name}",\n\
-					"algorithmName": "${3:algo_name}",\n\
-					"input": [\n\
-						"${4:input_target}"\n\
-					]\n\
-				}\n\
-			],\n\
-			"flowInput": {\n\
-				"files": {\n\
-					"link": "${5:link_name}"\n\
-				}\n\
-			},\n\
-			"webhooks": {\n\
-				"progress": "${6:progess}",\n\
-				"result": "${7:result}",\n\
-			},\n\
-			"priority": "${8:priority_number}",\n\
-			"options": {\n\
-				"progressVerbosityLevel": "${9:level}"\n\
-			}\n\
-  }\n\
-  ') // eslint-disable-line
-  , 
-    (t.scope = 'json');
+  (t.snippetText =snippet), (t.scope = 'json');
 });
 
 const JsonEditor = () => {

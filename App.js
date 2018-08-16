@@ -3,11 +3,8 @@ import './App.css';
 import { Layout, Row, Col, Button, Modal, Icon } from 'antd';
 
 import JsonEditor from './components/JsonEditor';
-const ReactMarkdown = require('react-markdown');
 
 const { Header } = Layout;
-
-const mdNotes ='For auto-complete use `Ctrl+Enter`.\n\nType `nodeadd` for node-adding snippet.\n';
 
 class App extends Component {
   state = {
@@ -20,7 +17,7 @@ class App extends Component {
     });
   };
 
-  handleOK = e => {
+  handleOk = e => {
     console.log(e);
     this.setState({
       visible: false
@@ -47,7 +44,7 @@ class App extends Component {
           >
             <Row type="flex" justify="start" align="middle">
               <Col
-                span={2}
+                span={8}
                 style={{
                   color: 'white',
                   fontSize: '22px',
@@ -57,12 +54,10 @@ class App extends Component {
                 }}
               >
                 {' '}
-                HKUBE
+                JSON-EDITOR-EXAMPLE
               </Col>
-              <Col span={10} offset={6} />
-              <Col span={2} offset={4}>
+              <Col span={2} offset={14}>
                 <Button
-                  className="Add-Pipe"
                   type="primary"
                   size="default"
                   style={{
@@ -70,7 +65,8 @@ class App extends Component {
                     fontSize: '15px',
                     fontWeight: 'bold',
                     fontFamily: 'monospace',
-                    letterSpacing: '1px'
+                    letterSpacing: '1px',
+                    backgroundColor: '#4da0ee'
                   }}
                   onClick={this.showModal}
                 >
@@ -93,10 +89,13 @@ class App extends Component {
                 >
                   <JsonEditor />
                   <p />
-                  <ReactMarkdown source={mdNotes} />
+                  <p>
+                    Use <code>addn</code> <strong>snippet</strong> for adding{' '}
+                    <strong>pipe-node</strong>. Use <code>Ctrl+Space</code> for{' '}
+                    <strong>auto-completion</strong>.
+                  </p>
                 </Modal>
               </Col>
-              <Col span={2} />
             </Row>
           </Header>
         </Layout>
