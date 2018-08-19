@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-import './App.css';
+import 'antd/dist/antd.css'
+
 import { Layout, Row, Col, Button, Modal, Icon } from 'antd';
+import ReactJson from 'react-json-view';
 
-import JsonEditor from './components/JsonEditor';
+import JsonEditor from './components/JsonEditor.react';
+import template from './lib/json-object.json';
 
-const { Header } = Layout;
+const jsonTemplate = JSON.stringify(template, null, 2);
 
-class App extends Component {
+const { Header, Content } = Layout;
+
+class AddPipe extends Component {
+  constructor() {
+    super();
+    this.pipe = jsonTemplate;
+    this.saved = this.pipe;
+  }
   state = {
     visible: false
   };
@@ -26,8 +36,21 @@ class App extends Component {
 
   handleCancel = e => {
     console.log(e);
+    this.saved = this.pipe;
     this.setState({
       visible: false
+    });
+  };
+
+  handleReset = e => {
+    console.log(e);
+    this.pipe = jsonTemplate;
+    this.saved = this.pipe;
+    this.setState({
+      visible: false
+    });
+    this.setState({
+      visible: true
     });
   };
 
@@ -86,8 +109,23 @@ class App extends Component {
                   onOk={this.handleOk}
                   onCancel={this.handleCancel}
                   width="800px"
+                  footer={[
+                    <Button onClick={this.handleCancel}> Cancel</Button>,
+                    <Button onClick={this.handleReset}> Reset</Button>,
+                    <Button
+                      type="primary"
+                      size="default"
+                      onClick={this.handleOk}
+                    >
+                      {' '}
+                      Add Pipe
+                    </Button>
+                  ]}
                 >
-                  <JsonEditor />
+                  <JsonEditor
+                    jsonTemplate={this.saved}
+                    pipe={newPipe => (this.pipe = newPipe)}
+                  />
                   <p />
                   <p>
                     Use <code>addn</code> <strong>snippet</strong> for adding{' '}
@@ -98,10 +136,27 @@ class App extends Component {
               </Col>
             </Row>
           </Header>
+          <Content>
+            <ReactJson
+              src={JSON.parse(this.pipe)}
+              name={false}
+              enableClipboard={false}
+              displayObjectSize={false}
+              displayDataTypes={false}
+              theme="monokai"
+              style={{
+                fontWeight: 'bold',
+                fontFamily: 'monospace',
+                letterSpacing: '1px',
+                padding: 24,
+                minHeight: 280,
+              }}
+            />
+          </Content>
         </Layout>
       </div>
     );
   }
 }
 
-export default App;
+export default AddPipe;
