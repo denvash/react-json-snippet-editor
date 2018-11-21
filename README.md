@@ -1,5 +1,7 @@
 # Json-Editor with snippet
 
+![snippet-example](https://media.giphy.com/media/8OPBqo5WqLRyPY3NDS/giphy.gif)
+
 Web code editor with personal snippets.
 
 > What are snippets?
